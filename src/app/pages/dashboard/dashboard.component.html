@@ -1,0 +1,66 @@
+<section class="d-flex flex-column overflow-hidden" style="max-height: 100vh">
+  <header
+    class="dashboard-header navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between shadow-sm"
+  >
+    <h3 style="color: #9a616d;">Blog page</h3>
+    <div class="d-flex gap-3">
+      <div class="user-logged d-flex align-items-center">
+        <div>
+          <span>Welcome </span
+          ><span>{{ authService.currentUserValue?.name }} </span>
+        </div>
+        <img
+          lazy="true"
+          [src]="'https://files.fullstack.edu.vn/f8-prod/user_avatars/309573/64af7196d84c6.png'"
+          alt="avatar"
+          style="
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 1rem;
+          "
+        />
+        <button type="button" class="btn btn-dark btn-sm btn-block" style="margin-left: 1rem;" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+  <section
+    class="d-flex justify-content-center overflow-auto flex-1"
+    style="background-color: #8b5e669c; min-height: calc(100vh - 57.6px);"
+  >
+    <div class="container d-flex flex-column">
+      <div class="d-flex align-items-center justify-content-between gap-3">
+        <app-blog-search-sort></app-blog-search-sort>
+    
+        <button
+        type="button"
+        class="btn btn-sm btn-info text-nowrap"
+        (click)="$event.stopPropagation(); onCreateBlog()"
+      >
+        Create new
+      </button>
+      </div>
+      <app-blog-list [blogs]="blogs" [loading]="blogsLoading" (onEditBlog)="onEditBlog($event)"></app-blog-list>
+      <app-pagination
+        class="mt-auto pb-3"
+        [totalItems]="totalBlogs"
+        [itemsPerPage]="20"
+        [currentPage]="page"
+        (pageChange)="onPageChange($event)">
+      ></app-pagination>
+    </div>
+  </section>
+</section>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    @if(!isOnEditBlog) {
+      <h4 class="modal-title">Create a new blog</h4>
+    } @else {
+      <h4 class="modal-title">Edit blog</h4>
+    }
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <app-blog-form (submitBlog)="onModalSubmit($event)" [blogDataForEdit]="blogDataForEdit"></app-blog-form>
+</ng-template>

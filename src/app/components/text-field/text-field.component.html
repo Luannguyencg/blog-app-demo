@@ -1,0 +1,42 @@
+<div class="form-group">
+  <label *ngIf="label" [attr.for]="id" class="form-label">{{ label }}</label>
+  <ng-container *ngIf="inputType === EInputType.textArea; else inputField">
+    <textarea
+      [(ngModel)]="value"
+      [id]="id"
+      [placeholder]="placeholder"
+      [ngClass]="{
+        'form-control': true,
+        'is-invalid': errorText && control?.touched,
+        'form-control-sm': size === ETextFieldSize.small,
+        'form-control-lg': size === ETextFieldSize.large
+      }"
+      [disabled]="disabled ? true : false"
+      [readonly]="readonly ? true : false"
+      (input)="onChange($any($event.target).value)"
+      (blur)="onTouched()"
+      (keyup)="writeValue($any($event.target).value)"
+    ></textarea>
+  </ng-container>
+
+  <ng-template #inputField>
+    <input
+      [(ngModel)]="value"
+      [type]="type"
+      [id]="id"
+      [placeholder]="placeholder"
+      [ngClass]="{
+        'form-control': true,
+        'is-invalid': errorText && control?.touched,
+        'form-control-sm': size === ETextFieldSize.small,
+        'form-control-lg': size === ETextFieldSize.large
+      }"
+      [disabled]="disabled ? true : false"
+      [readonly]="readonly ? true : false"
+      (input)="onChange($any($event.target).value)"
+      (blur)="onTouched()"
+      (keyup)="writeValue($any($event.target).value)"
+    >
+  </ng-template>
+  <div *ngIf="errorText && control?.touched" class="invalid-feedback">{{ errorText }}</div>
+</div>

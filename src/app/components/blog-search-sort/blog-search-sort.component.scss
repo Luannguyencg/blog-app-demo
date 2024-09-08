@@ -1,0 +1,11 @@
+.search-sort {
+  width: fit-content;
+  margin-top: 1rem;
+
+  .sort-box {
+    padding: 0 6px;
+    border-radius: var(--bs-border-radius);
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    cursor: pointer;
+  }
+}

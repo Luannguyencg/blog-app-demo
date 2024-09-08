@@ -1,0 +1,20 @@
+<section class="search-sort d-flex flex-row gap-3">
+  <form [formGroup]="searchForm">
+    <app-text-field
+      id="search"
+      placeholder="Enter your search text"
+      formControlName="search"
+    ></app-text-field>
+  </form>
+  <button
+    class="btn btn-light sort-box d-flex align-items-center flex-row gap-2 mb-3 cursor-pointer"
+    (click)="handleClickSort()"
+  >
+    <span class="sort-text">Sort</span>
+    @if(sortValue === ESort.desc) {
+      <i class="bi bi-sort-up"></i>
+    } @else {
+      <i class="bi bi-sort-down-alt"></i>
+    }
+  </button>
+</section>

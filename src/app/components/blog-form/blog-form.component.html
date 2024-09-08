@@ -1,0 +1,49 @@
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+    <app-text-field
+      id="title"
+      label="Title"
+      placeholder="Enter blog title"
+      formControlName="title"
+      [errorText]="f['title'].errors ? 'Title is required' : ''"
+    >
+    </app-text-field>
+
+    <app-text-field
+      id="content"
+      label="Content"
+      placeholder="Enter content title"
+      formControlName="content"
+      [inputType]="EInputType.textArea"
+      [errorText]="f['content'].errors ? 'Content is required' : ''"
+    >
+    </app-text-field>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Avatar</label>
+      <input
+        formControlName="image"
+        type="file"
+        class="form-control"
+        id="image"
+        accept="image/*"
+        (change)="previewImageBlog($event)"
+      />
+    </div>
+    <div class="mb-3 text-center">
+      <img
+        srcErrorFallback
+        [fallback]="'https://files.fullstack.edu.vn/f8-prod/user_avatars/309573/64af7196d84c6.png'"
+        lazy="true"
+        [src]="imageBlogUrl"
+        *ngIf="imageBlogUrl"
+        alt="Image Preview"
+        style="width: 150px; height: 150px; object-fit: cover"
+      />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>

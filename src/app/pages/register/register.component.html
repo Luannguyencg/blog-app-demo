@@ -1,0 +1,84 @@
+<section
+  class="d-flex justify-content-center align-items-center min-vh-100"
+  style="background-color: #8b5e66"
+>
+  <div class="card p-4" style="max-width: 500px; border-radius: 10px">
+    <div class="card-body">
+      <h1 class="card-title fw-bold">Register</h1>
+      <p class="card-text">Create a new account</p>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <app-text-field
+          id="name"
+          label="Name"
+          placeholder="Enter your name"
+          formControlName="name"
+          [errorText]="f['name'].errors ? 'Name is required' : ''"
+        >
+        </app-text-field>
+
+        <app-text-field
+          id="email"
+          label="Email"
+          placeholder="Enter your email"
+          [type]="ETextFieldType.email"
+          formControlName="email"
+          [errorText]="f['email'].errors ? 'Valid email is required' : ''"
+        >
+        </app-text-field>
+
+        <app-text-field
+          id="password"
+          label="Password"
+          placeholder="Enter your password"
+          [type]="ETextFieldType.password"
+          formControlName="password"
+          [errorText]="
+            f['password'].errors ? 'Password must be at least 8 characters' : ''
+          "
+        >
+        </app-text-field>
+
+        <app-text-field
+          id="confirmPassword"
+          label="Confirm Password"
+          placeholder="Confirm your password"
+          [type]="ETextFieldType.password"
+          formControlName="confirmPassword"
+          [errorText]="
+            !f['confirmPassword'].errors ?
+            (registerForm.errors?.['mismatch'] ? 'Passwords do not match' : '') : 'Confirm password is required'
+          "
+        >
+        </app-text-field>
+        <div class="mb-3">
+          <label for="avatar" class="form-label">Avatar</label>
+          <input
+            formControlName="avatar"
+            type="file"
+            class="form-control"
+            id="avatar"
+            accept="image/*"
+            (change)="previewAvatar($event)"
+          />
+        </div>
+        <div class="mb-3 text-center">
+          <img
+            [src]="avatarUrl"
+            *ngIf="avatarUrl"
+            alt="Avatar Preview"
+            style="
+              width: 150px;
+              height: 150px;
+              object-fit: cover;
+              border-radius: 50%;
+            "
+          />
+        </div>
+        <button type="submit" class="btn btn-dark w-100" [disabled]="isSubmitting">Register</button>
+      </form>
+      <p class="mt-3">
+        Already have an account? <a routerLink="/login">Login here</a>
+      </p>
+    </div>
+  </div>
+</section>
