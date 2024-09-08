@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
           this.totalBlogs = pagination?.count || 0;
           this.blogsLoading = loading;
 
-          if (this.page > (pagination?.total || 0)) {
+          if (pagination && this.page > (pagination.total || 0)) {
             this.onPageChange(1);
           }
         
