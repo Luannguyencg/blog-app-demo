@@ -20,7 +20,7 @@
       />
       <div class="media-body flex-1 w-100 p-3">
         <div class="d-flex justify-content-between align-items-start">
-          <h5 class="mt-0 mb-1 text-break">{{ blog.title }}</h5>
+          <h6 class="mt-0 mb-1 blog-title" >{{ blog.title }}</h6>
           <button
             type="button"
             class="btn btn-sm btn-info text-nowrap"
@@ -29,7 +29,9 @@
             Edit blog
           </button>
         </div>
-        {{ blog.content }}
+        <div class="blog-content">
+          {{ blog.content }}
+        </div>
       </div>
     </li>
   } @else {
